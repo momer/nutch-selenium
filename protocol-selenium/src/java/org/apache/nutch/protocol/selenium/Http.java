@@ -7,22 +7,17 @@ import java.util.Collection;
 import java.util.HashSet;
 
 import org.apache.hadoop.conf.Configuration;
-// import org.apache.nutch.crawl.CrawlDatum;
 import org.apache.nutch.net.protocols.Response;
 import org.apache.nutch.protocol.http.api.HttpBase;
-// import org.apache.nutch.net.protocols.Response;
 import org.apache.nutch.protocol.ProtocolException;
-import org.apache.nutch.protocol.selenium.HttpResponse;
 import org.apache.nutch.util.NutchConfiguration;
 import org.apache.nutch.storage.WebPage;
 import org.apache.nutch.storage.WebPage.Field;
 
+import org.apache.nutch.protocol.selenium.HttpResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-// Commons Logging imports
-// Hadoop imports
-// Nutch imports
-
 
 public class Http extends HttpBase {
 
@@ -42,11 +37,6 @@ public class Http extends HttpBase {
   @Override
   public void setConf(Configuration conf) {
     super.setConf(conf);
-//    Level logLevel = Level.WARNING;
-//    if (conf.getBoolean("http.verbose", false)) {
-//      logLevel = Level.FINE;
-//    }
-//    LOG.setLevel(logLevel);
   }
 
   public static void main(String[] args) throws Exception {

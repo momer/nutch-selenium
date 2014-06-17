@@ -24,9 +24,10 @@ public class HttpWebClient {
         @Override
         protected WebDriver initialValue()
         {
-//            return new FirefoxDriver(); //You can use other driver based on your requirement.
             FirefoxProfile profile = new FirefoxProfile();
             profile.setPreference("permissions.default.stylesheet", 2);
+            profile.setPreference("permissions.default.image", 2);
+            profile.setPreference("dom.ipc.plugins.enabled.libflashplayer.so", "false");
             WebDriver driver = new FirefoxDriver(profile);
             return driver;
         };
@@ -34,21 +35,24 @@ public class HttpWebClient {
 
     public static String getHtmlPage(String url, Configuration conf) {
         try {
-            WebDriver driver = threadWebDriver.get();
-            if (driver == null) {
-                driver = new FirefoxDriver();
-            }
+            WebDriver driver = new FirefoxDriver();
+//            }            WebDriver driver = threadWebDriver.get();
+//            if (driver == null) {
+//                driver = new FirefoxDriver();
+//            }
 
             driver.get(url);
 
             // Wait for the page to load, timeout after 3 seconds
             new WebDriverWait(driver, 3);
 
-            // Return a page maybe? Maybe just body innerHTML?
-            return driver.findElement(By.tagName("body")).getText();
-
+            String innerHtml = driver.findElement(By.tagName("body")).getAttribute("innerHTML");
             //Close the browser
-//            driver.quit();
+            driver.quit();
+            // Return a page maybe? Maybe just body innerHTML?
+            return innerHtml;
+
+
             // I'm sure this catch statement is a code smell ; borrowing it from lib-htmlunit
         } catch (Exception e) {
             throw new RuntimeException(e);

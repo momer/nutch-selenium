@@ -29,7 +29,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-/** An HTTP response. */
+/* Most of this code was borrowed from protocol-htmlunit; which in turn borrowed it from protocol-httpclient */
+
 public class HttpResponse implements Response {
 
     private Http http;
