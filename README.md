@@ -4,7 +4,9 @@ Nutch Selenium
 This plugin allows you to fetch javascript pages using Selenium, while relying on the rest of the awesome Nutch stack! This allows you to
 
 A) Leverage Nutch, a world class web crawler
+
 B) Not have to use some paid service just to perform large-scale javascript/ajax aware web crawls
+
 C) Not have to wait another 2 years for Nutch to patch in either the [Ajax crawler hashbang workaround](https://issues.apache.org/jira/browse/NUTCH-1323) and then, not having to patch it to get the use case of ammending the original url with the hashbang-workaround's content.
 
 The underlying code is based on the nutch-htmlunit plugin, which was in turn based on nutch-httpclient. I also have patches to send through on nutch-htmlunit which get it working with nutch 2.2.1, so stay tuned if you want to use htmlunit for some reason.
@@ -27,7 +29,8 @@ sudo apt-get install xorg synaptic xvfb gtk2-engines-pixbuf xfonts-cyrillic xfon
 ```
 C) Set a display for Xvfb, so that firefox believes a display is connected
 ```
-sudo Xvfb :10 -ac && export DISPLAY=:10
+sudo /usr/bin/Xvfb :11 -screen 0 1024x768x24 &
+sudo export DISPLAY=:11
 ```
 Part 2: Installing plugin for Nutch (where NUTCH_HOME is the root of your nutch install)
 
@@ -87,11 +90,12 @@ D) Add the plugin folders to your installation's `NUTCH_HOME/src/plugin` directo
 
 ![Nutch plugin directory](http://i.imgur.com/CzLqoqO.png)
 
-E) Start Xvfb
+E) Compile nutch
 ```
-/usr/bin/Xvfb :11 -screen 0 1024x768x24 &
+ant runtime
 ```
-F) Start your web crawl
+
+F) Start your web crawl (Ensure that you followed the above steps and have started your xvfb display as shown above)
 ```
 NUTCH_HOME/bin/crawl /opt/apache-nutch-2.2.1/urls/ webpage $NUTCH_SOLR_SERVER $NUTCH_CRAWL_DEPTH
 ```
