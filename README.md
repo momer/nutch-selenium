@@ -21,8 +21,9 @@ sudo apt-get install firefox
 ```
 B) Install Xvfb and its associates
 ```
-sudo apt-get install xvfb gtk2-engines-pixbuf xfonts-cyrillic \
-xfonts-100dpi xfonts-75dpi xfonts-base xfonts-scalable
+sudo apt-get install xorg synaptic xvfb gtk2-engines-pixbuf xfonts-cyrillic xfonts-100dpi \
+    xfonts-75dpi xfonts-base xfonts-scalable freeglut3-dev dbus-x11 openbox x11-xserver-utils \
+    libxrender1 cabextract
 ```
 C) Set a display for Xvfb, so that firefox believes a display is connected
 ```
@@ -86,4 +87,12 @@ D) Add the plugin folders to your installation's `NUTCH_HOME/src/plugin` directo
 
 ![Nutch plugin directory](http://i.imgur.com/CzLqoqO.png)
 
+E) Start Xvfb
+```
+/usr/bin/Xvfb :11 -screen 0 1024x768x24 &
+```
+F) Start your web crawl
+```
+NUTCH_HOME/bin/crawl /opt/apache-nutch-2.2.1/urls/ webpage $NUTCH_SOLR_SERVER $NUTCH_CRAWL_DEPTH
+```
 
