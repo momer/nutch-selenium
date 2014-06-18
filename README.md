@@ -13,24 +13,24 @@ The underlying code is based on the nutch-htmlunit plugin, which was in turn bas
 
 Part 1: Setting up Selenium
 
-1. Ensure that you have Firefox installed
+A) Ensure that you have Firefox installed
 ```
 # More info about the package @ [launchpad](https://launchpad.net/ubuntu/trusty/+source/firefox)
 
 sudo apt-get install firefox
 ```
-2. Install Xvfb and its associates
+B) Install Xvfb and its associates
 ```
 sudo apt-get install xvfb gtk2-engines-pixbuf xfonts-cyrillic \
 xfonts-100dpi xfonts-75dpi xfonts-base xfonts-scalable
 ```
-3. Set a display for Xvfb, so that firefox believes a display is connected
+C) Set a display for Xvfb, so that firefox believes a display is connected
 ```
 sudo Xvfb :10 -ac && export DISPLAY=:10
 ```
 Part 2: Installing plugin for Nutch (where NUTCH_HOME is the root of your nutch install)
 
-1. Add Selenium to your Nutch dependencies
+A) Add Selenium to your Nutch dependencies
 ```
 <!-- NUTCH_HOME/ivy/ivy.xml -->
 
@@ -47,7 +47,7 @@ Part 2: Installing plugin for Nutch (where NUTCH_HOME is the root of your nutch 
   </dependencies>
 </ivy-module>
 ```
-2. Add the required plugins to your `NUTCH_HOME/src/plugin/build.xml`
+B) Add the required plugins to your `NUTCH_HOME/src/plugin/build.xml`
 ```
 <!-- NUTCH_HOME/src/plugin/build.xml -->
 
@@ -63,7 +63,7 @@ Part 2: Installing plugin for Nutch (where NUTCH_HOME is the root of your nutch 
       ...
 </project>
 ```
-3. Ensure that the plugin will be used as the fetcher/initial parser in your config
+C) Ensure that the plugin will be used as the fetcher/initial parser in your config
 ```
 <!-- NUTCH_HOME/conf/nutch-site.xml -->
 
@@ -82,7 +82,7 @@ Part 2: Installing plugin for Nutch (where NUTCH_HOME is the root of your nutch 
     </description>
   </property>
 ```
-4. Add the plugin folders to your installation's `NUTCH_HOME/src/plugin` directory
+D) Add the plugin folders to your installation's `NUTCH_HOME/src/plugin` directory
 
 ![Nutch plugin directory](http://i.imgur.com/CzLqoqO.png)
 
