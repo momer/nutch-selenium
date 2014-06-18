@@ -97,6 +97,6 @@ ant runtime
 
 F) Start your web crawl (Ensure that you followed the above steps and have started your xvfb display as shown above)
 ```
-NUTCH_HOME/bin/crawl /opt/apache-nutch-2.2.1/urls/ webpage $NUTCH_SOLR_SERVER $NUTCH_CRAWL_DEPTH
+NUTCH_HOME/runtime/local/bin/crawl /opt/apache-nutch-2.2.1/urls/ webpage $NUTCH_SOLR_SERVER $NUTCH_CRAWL_DEPTH
 ```
 
