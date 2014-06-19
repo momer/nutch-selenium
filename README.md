@@ -11,6 +11,11 @@ C) Not have to wait another 2 years for Nutch to patch in either the [Ajax crawl
 
 The underlying code is based on the nutch-htmlunit plugin, which was in turn based on nutch-httpclient. I also have patches to send through on nutch-htmlunit which get it working with nutch 2.2.1, so stay tuned if you want to use htmlunit for some reason.
 
+
+## TODO:
+
+1. Migrate this code to a [Selenium Grid/Server] set-up.
+
 ## Installation (tested on Ubuntu 14.0x)
 
 Part 1: Setting up Selenium
