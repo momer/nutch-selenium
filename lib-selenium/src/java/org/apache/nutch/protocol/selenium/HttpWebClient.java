@@ -34,8 +34,10 @@ public class HttpWebClient {
     };
 
     public static String getHtmlPage(String url, Configuration conf) {
+        WebDriver driver = null;
+
         try {
-            WebDriver driver = new FirefoxDriver();
+            driver = new FirefoxDriver();
 //            }            WebDriver driver = threadWebDriver.get();
 //            if (driver == null) {
 //                driver = new FirefoxDriver();
@@ -47,15 +49,14 @@ public class HttpWebClient {
             new WebDriverWait(driver, 3);
 
             String innerHtml = driver.findElement(By.tagName("body")).getAttribute("innerHTML");
-            //Close the browser
-            driver.quit();
-            // Return a page maybe? Maybe just body innerHTML?
-            return innerHtml;
 
+            return innerHtml;
 
             // I'm sure this catch statement is a code smell ; borrowing it from lib-htmlunit
         } catch (Exception e) {
             throw new RuntimeException(e);
+        } finally {
+            if (driver != null) try { driver.quit(); } catch (Exception e) { throw new RuntimeException(e); }
         }
     };
 
