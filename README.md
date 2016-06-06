@@ -22,11 +22,14 @@ The underlying code is based on the nutch-htmlunit plugin, which was in turn bas
 
 Part 1: Setting up Selenium
 
-A) Ensure that you have Firefox installed
+A) Ensure that you have Firefox installed. Selenium 2.42.2 will not work with latest Firefox, so I recommend to use Firefox 29.
 ```
 # More info about the package @ [launchpad](https://launchpad.net/ubuntu/trusty/+source/firefox)
 
-sudo apt-get install firefox
+wget https://ftp.mozilla.org/pub/firefox/releases/29.0/linux-x86_64/en-US/firefox-29.0.tar.bz2
+tar -xjf firefox-29.0.tar.bz2
+sudo mv firefox /opt/
+sudo ln -s /opt/firefox/firefox /usr/bin/firefox
 ```
 B) Install Xvfb and its associates
 ```
@@ -82,27 +85,30 @@ C) Ensure that the plugin will be used as the fetcher/initial parser in your con
   ...
   <property>
     <name>plugin.includes</name>
-    <value>protocol-selenium|urlfilter-regex|parse-(html|tika)|index-(basic|anchor)|urlnormalizer-(pass|regex|basic)|scoring-opic</value>
-    <description>Regular expression naming plugin directory names to
-    include.  Any plugin not matching this expression is excluded.
-    In any case you need at least include the nutch-extensionpoints plugin. By
-    default Nutch includes crawling just HTML and plain text via HTTP,
-    and basic indexing and search plugins. In order to use HTTPS please enable 
-    protocol-httpclient, but be aware of possible intermittent problems with the 
-    underlying commons-httpclient library.
-    </description>
+    <value>protocol-selenium|urlfilter-regex|index-(basic|more)|query-(basic|site|url|lang)|indexer-elastic|nutch-extensionpoints|parse-(text|html|msexcel|msword|mspowerpoint|pdf)|summary-basic|scoring-opic|urlnormalizer-(pass|regex|basic)|parse-(html|tika|metatags)|index-(basic|anchor|more|metadata)</value>
   </property>
 ```
-D) Add the plugin folders to your installation's `NUTCH_HOME/src/plugin` directory
+D) Add the required configuration to your `NUTCH_HOME/runtime/local/conf/nutch-site.xml`
+```
+  <property>
+    <name>urlselenium.regex.file</name>
+    <value>regex-urlselenium.txt</value>
+    <description>Name of file on CLASSPATH containing regular expressions
+    used by protocol-selenium plugin.</description>
+  </property>
+```
+E) Create regex-urlselenium.txt file in NUTCH_HOME/runtime/local/conf and register the URLs that will be going to use selenium. The URLs regex format should be the same as what you already use in regex-urlfilter.txt file.
+
+F) Add the plugin folders to your installation's `NUTCH_HOME/src/plugin` directory
 
 ![Nutch plugin directory](http://i.imgur.com/CzLqoqO.png)
 
-E) Compile nutch
+G) Compile nutch
 ```
 ant runtime
 ```
 
-F) Start your web crawl (Ensure that you followed the above steps and have started your xvfb display as shown above)
+H) Start your web crawl (Ensure that you followed the above steps and have started your xvfb display as shown above)
 ```
 NUTCH_HOME/runtime/local/bin/crawl /opt/apache-nutch-2.2.1/urls/ webpage $NUTCH_SOLR_SERVER $NUTCH_CRAWL_DEPTH
 ```
