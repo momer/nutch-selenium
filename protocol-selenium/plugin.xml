@@ -31,6 +31,7 @@
       <import plugin="nutch-extensionpoints"/>
       <import plugin="lib-http"/>
       <import plugin="lib-selenium"/>
+      <import plugin="lib-regex-filter"/>
    </requires>
 
    <extension id="org.apache.nutch.protocol.selenium"
@@ -40,6 +41,11 @@
       <implementation id="org.apache.nutch.protocol.selenium.Http"
                       class="org.apache.nutch.protocol.selenium.Http">
         <parameter name="protocolName" value="http"/>
+      </implementation>
+      
+      <implementation id="org.apache.nutch.protocol.selenium.Http"
+                      class="org.apache.nutch.protocol.selenium.Http">
+           <parameter name="protocolName" value="https"/>
       </implementation>
 
    </extension>

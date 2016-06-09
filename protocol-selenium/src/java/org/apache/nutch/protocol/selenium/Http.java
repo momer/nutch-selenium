@@ -19,11 +19,15 @@ import org.apache.nutch.protocol.selenium.HttpResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.apache.nutch.protocol.selenium.RegexURLFilter;
+
 public class Http extends HttpBase {
 
   public static final Logger LOG = LoggerFactory.getLogger(Http.class);
 
   private static final Collection<WebPage.Field> FIELDS = new HashSet<WebPage.Field>();
+
+  private static RegexURLFilter regexUrlFilter;
 
   static {
     FIELDS.add(WebPage.Field.MODIFIED_TIME);
@@ -36,6 +40,9 @@ public class Http extends HttpBase {
 
   @Override
   public void setConf(Configuration conf) {
+    regexUrlFilter = new RegexURLFilter();
+    regexUrlFilter.setConf(conf);
+
     super.setConf(conf);
   }
 
@@ -48,7 +55,14 @@ public class Http extends HttpBase {
     @Override
     protected Response getResponse(URL url, WebPage page, boolean redirect)
             throws ProtocolException, IOException {
-        return new HttpResponse(this, url, page, getConf());
+        String urlFiltered = null;
+        try {
+          urlFiltered = regexUrlFilter.filter(url.toString()); // filter the url
+        } catch (Exception e) {
+          urlFiltered = null;
+        }
+
+        return new HttpResponse(this, url, page, getConf(), urlFiltered != null);
     }
 
   @Override
