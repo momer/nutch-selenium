@@ -14,7 +14,7 @@ The underlying code is based on the nutch-htmlunit plugin, which was in turn bas
 
 ## IMPORTANT NOTES:
 
-~This plugin is currently being merged into the Nutch Core - see [issue #1933 on Nutch's JIRA](https://issues.apache.org/jira/browse/NUTCH-1933)~ 
+~~This plugin is currently being merged into the Nutch Core - see [issue #1933 on Nutch's JIRA](https://issues.apache.org/jira/browse/NUTCH-1933)~~
 
 1. This plugin is currently in the nutch core. See [lib-selenium](https://github.com/apache/nutch/tree/master/src/plugin/lib-selenium) and [protocol-selenium](https://github.com/apache/nutch/tree/master/src/plugin/protocol-selenium).
 
